@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            margin:0;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: grey;
+        }
+
+        #hangmanGame {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #bdaaaa;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #wordDisplay {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        #guessInput {
+            width: 70%;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #0a8d13;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #51d14f;
+        }
+
+        #message {
+            margin-top: 20px;
+        }
+        h1{
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+
+<div id="hangmanGame">
+    <h2>Hangman Game</h2>
+    <div id="wordDisplay"></div>
+    <input type="text" id="guessInput" placeholder="Enter a letter">
+    <button onclick="guessLetter()">Guess</button>
+    <h1 id="attempts">You Have 5 Attempts</h1>
+</div>
+
+
+<script>
+    var words = ["javascript", "hangman", "developer", "programming", "coding"];
+    var selectedWord = words[Math.floor(Math.random() * words.length)];
+    var guessedWord = Array(selectedWord.length).fill('_');
+    var incorrectGuesses = 0;
+
+    // Function to display the current state of the word
+    function displayWord() {
+        var wordDisplay = document.getElementById('wordDisplay');
+        wordDisplay.innerText = guessedWord.join(' ');
+    }
+
+    // Function to process a guessed letter
+    function guessLetter() {
+        var guessInput = document.getElementById('guessInput');
+        var guess = guessInput.value.toLowerCase();
+        guessInput.value = '';
+
+        if (guess.length === 1 && guess.match(/[a-z]/i)) {
+            if (selectedWord.includes(guess)) {
+                for (var i = 0; i < selectedWord.length; i++) {
+                    if (selectedWord[i] === guess) {
+                        guessedWord[i] = guess;
+                    }
+                }
+            } else {
+                incorrectGuesses++;
+            }
+
+            displayWord();
+            checkGameStatus();
+            updateAttemptsMessage(); // Add this line to update the attempts message
+        } else {
+            alert("Please enter a valid single letter.");
+        }
+    }
+
+    // Function to check the game status (win or lose)
+    function checkGameStatus() {
+        var message = document.getElementById('message');
+
+        if (guessedWord.join('') === selectedWord) {
+            message.innerText = "Congratulations! You guessed the word!";
+        } else if (incorrectGuesses >= 5) {
+            alert("Sorry, you ran out of attempts. The word was: " + selectedWord);
+
+            //message.innerText = "Sorry, you ran out of attempts. The word was: " + selectedWord;
+        }
+    }
+
+    // Function to update the attempts message
+    function updateAttemptsMessage() {
+        var attemptsMessage = "You have " + (5 - incorrectGuesses) + " attempts left";
+        document.getElementById('attempts').innerText = attemptsMessage;
+    }
+
+    // Initial display of the word
+    displayWord();
+</script>
+
+</body>
+</html>
+
