@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #181a1b;
+        }
+
+        #imageSlider {
+            width: 400px;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        img {
+            width: 100%; /* Make the image fill the width of the container */
+            height: auto; /* Maintain the aspect ratio */
+            max-width: 100%;
+            border-radius: 80px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #181a1b;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            margin: 0 10px;
+        }
+
+        button:hover {
+            background-color: #4fa3d1;
+        }
+    </style>
+</head>
+<body>
+
+<div id="imageSlider">
+    <h2>Image Slider</h2>
+    <img src="image1.jpg" alt="Image 1" id="sliderImage">
+    <br>
+    <button onclick="prevImage()">Previous</button>
+    <button onclick="nextImage()">Next</button>
+</div>
+
+<script>
+    var currentImageIndex = 0;
+    var imageArray = ["image1.jpg", "image2.jpg", "image3.jpg", "image4.jpg"];
+
+    // Function to display the current image
+    function displayImage() {
+        var sliderImage = document.getElementById('sliderImage');
+        sliderImage.src = imageArray[currentImageIndex];
+    }
+
+    // Function to go to the previous image
+    function prevImage() {
+        currentImageIndex = (currentImageIndex - 1 + imageArray.length) % imageArray.length;
+        displayImage();
+    }
+
+    // Function to go to the next image
+    function nextImage() {
+        currentImageIndex = (currentImageIndex + 1) % imageArray.length;
+        displayImage();
+    }
+
+    // Initial display of the first image
+    displayImage();
+</script>
+
+</body>
+</html>

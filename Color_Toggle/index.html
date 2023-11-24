@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Toggle</title>
+    <style>
+        body {
+    background-color:black;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    margin: 0;
+    transition: background-color 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center horizontally */
+    height: 100vh; /* Make sure the body takes up the full height of the viewport */
+}
+
+#colorToggle {
+    max-width: 400px;
+    background-color: #dfd9d9;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    display: inline-block;
+    position: relative;
+    padding: 10px 25px;
+    background-color: #4CC713;
+    color: white;
+    font-family: sans-serif;
+    text-decoration: none;
+    font-size: 0.9em;
+    text-align: center;
+    text-indent: 15px;
+    border: none;
+}
+
+button:hover {
+    background-color: #4fa3d1;
+}
+
+    </style>
+</head>
+<body>
+
+<div id="colorToggle">
+    <h2>Color Toggle</h2>
+    <button onclick="toggleColor()">Toggle Color</button>
+</div>
+
+<script>
+    // Function to toggle background color between grey and black
+    function toggleColor() {
+    // Get a reference to the body element
+    var body = document.body;
+
+    // Get the current background color of the body using computed styles
+    var currentColor = window.getComputedStyle(body, null).getPropertyValue('background-color');
+
+    // Toggle between grey and black based on the current color
+    body.style.backgroundColor = (currentColor === 'rgb(0, 0, 0)') ? 'rgb(169, 169, 169)' : 'rgb(0, 0, 0)';
+}
+
+</script>
+
+</body>
+</html>

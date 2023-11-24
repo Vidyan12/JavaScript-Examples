@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Quiz Game</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 20px;
+        }
+
+        #quizGame {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background-color: #555758;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #4fa3d1;
+        }
+
+        p {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="quizGame">
+    <h2>Interactive Quiz Game</h2>
+    <p id="questionDisplay"></p>
+    <div id="options"></div>
+    <button onclick="nextQuestion()">Next Question</button>
+    <h1 id="result"></h1>
+</div>
+
+<script>
+    // Quiz questions and answers
+    var questions = [
+        {
+            question: "What is the capital of France?",
+            options: ["Berlin", "Paris", "Madrid", "Rome"],
+            correctAnswer: "Paris"
+        },
+        {
+            question: "Which planet is known as the Red Planet?",
+            options: ["Earth", "Mars", "Venus", "Jupiter"],
+            correctAnswer: "Mars"
+        },
+        {
+            question: "What is the largest mammal?",
+            options: ["Elephant", "Whale Shark", "Blue Whale", "Giraffe"],
+            correctAnswer: "Blue Whale"
+        }
+    ];
+
+    var currentQuestionIndex = 0;
+
+    // Function to display the current question
+    function displayQuestion() {
+        var questionDisplay = document.getElementById('questionDisplay');
+        var optionsContainer = document.getElementById('options');
+        var currentQuestion = questions[currentQuestionIndex];
+
+        // Display the question
+        questionDisplay.innerText = currentQuestion.question;
+
+        // Display answer options
+        optionsContainer.innerHTML = "";
+        for (var i = 0; i < currentQuestion.options.length; i++) {
+            var optionButton = document.createElement('button');
+            optionButton.innerText = currentQuestion.options[i];
+            optionButton.onclick = function () {
+                checkAnswer(this.innerText);
+            };
+            optionsContainer.appendChild(optionButton);
+        }
+    }
+
+    // Function to check the user's answer
+    function checkAnswer(userAnswer) {
+        var resultDisplay = document.getElementById('result');
+        var correctAnswer = questions[currentQuestionIndex].correctAnswer;
+
+        if (userAnswer === correctAnswer) {
+            resultDisplay.innerText = "Correct!";
+        } else {
+            resultDisplay.innerText = "Incorrect. The correct answer is: " + correctAnswer;
+        }
+    }
+
+    // Function to move to the next question
+    function nextQuestion() {
+        var resultDisplay = document.getElementById('result');
+        resultDisplay.innerText = "";
+
+        if (currentQuestionIndex < questions.length - 1) {
+            currentQuestionIndex++;
+            displayQuestion();
+        } else {
+            resultDisplay.innerText = "You have completed the quiz!";
+        }
+    }
+
+    // Initial display of the first question
+    displayQuestion();
+</script>
+
+</body>
+</html>

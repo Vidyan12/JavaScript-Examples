@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Flipper</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            margin: 0;
+            transition: background-color 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* Set a minimum height to cover the full viewport */
+        }
+
+        #colorFlipper {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background-color: #61dafb;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #4fa3d1;
+        }
+    </style>
+</head>
+<body>
+
+<div id="colorFlipper">
+    <h2>Color Flipper</h2>
+    <button onclick="changeBackgroundColor()">Flip Color</button>
+</div>
+
+<script>
+    // Function to generate a random color
+    function getRandomColor() {
+                // Define a string containing hexadecimal digits
+                var letters = '0123456789ABCDEF';
+
+                // Initialize an empty string to store the generated color
+                var color = '#';
+
+                // Loop six times to generate a six-character hexadecimal color code
+                for (var i = 0; i < 6; i++) {
+                    // Generate a random index between 0 and 15 (inclusive)
+                    var randomIndex = Math.floor(Math.random() * 16);
+
+                    // Append the character at the random index to the color string
+                    color += letters[randomIndex];
+    }
+
+    // Return the generated hexadecimal color code
+    return color;
+}
+
+
+    // Function to change the background color
+    function changeBackgroundColor() {
+        var body = document.body;
+        body.style.backgroundColor = getRandomColor();
+    }
+</script>
+
+</body>
+</html>
