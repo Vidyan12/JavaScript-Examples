@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roller</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin:0;
+            display: flex;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+            background-color: darkolivegreen;
+        }
+
+        #diceContainer {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #61dafb;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #4fa3d1;
+        }
+    </style>
+</head>
+<body>
+
+<div id="diceContainer">
+    <h1 id="dice">1</h1>
+    <button onclick="rollDice()">Roll Dice</button>
+</div>
+
+
+<script>
+    function rollDice() {
+        var diceContainer = document.getElementById('dice');
+        var randomNumber = Math.floor(Math.random() * 6) + 1;
+        diceContainer.innerText = randomNumber;
+    }
+</script>
+
+</body>
+</html>
